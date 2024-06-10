@@ -1,0 +1,29 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: data-collection
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+  cloud:
+    openfeign:
+      okhttp:
+        enabled: true
+    nacos:
+      discovery:
+        server-addr: 192.168.86.134:8848
+
+plc_client:
+  ip: 127.0.0.1
+  port: 8888
+
+socketio:
+  host: 127.0.0.1
+  port: 9000
+  Origin: "*"
+  bossCount: 1
+  namespace: "/conveyor"
+  allowCustomRequests: true

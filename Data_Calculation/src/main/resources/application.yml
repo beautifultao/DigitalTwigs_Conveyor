@@ -1,0 +1,8 @@
+server:
+  port: 8083
+spring:
+  application:
+    name: data-calculation
+  cloud:
+    nacos:
+      server-addr: 192.168.86.121:8848

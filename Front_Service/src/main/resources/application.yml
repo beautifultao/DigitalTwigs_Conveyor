@@ -1,0 +1,19 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: front-server
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/conveyor_belt?useSSL=FALSE&serverTimezone=Asia/Shanghai
+    username: unity
+    password: 123456
+
+conveyor:
+  jwt:
+    secretKey: CUMT_B405_DigitalTwigs_Conveyor
+    tokenHeader: Authorization
+    tokenHead: Bearer
+    expiration: 86400000
