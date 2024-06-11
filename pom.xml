@@ -12,7 +12,6 @@
         <module>Data_Collection</module>
         <module>Front_Service</module>
         <module>Common_Api</module>
-        <module>Data_Provider</module>
         <module>Data_Calculation</module>
     </modules>
 

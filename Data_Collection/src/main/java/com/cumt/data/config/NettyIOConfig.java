@@ -3,45 +3,32 @@ package com.cumt.data.config;
 import com.corundumstudio.socketio.SocketConfig;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.annotation.SpringAnnotationScanner;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.CommandLineRunner;
+import com.cumt.data.properties.NettyIOProperties;
+import jakarta.annotation.Resource;
 import org.springframework.context.annotation.Bean;
 
+
 public class NettyIOConfig {
-    @Value("${socketio.host}")
-    private String host;
-
-    @Value("${socketio.port}")
-    private Integer port;
-
-    @Value("${socketio.Origin}")
-    private String origin;
-
-    @Value("${socketio.bossCount}")
-    private Integer bossCount;
-
-    @Value("${socketio.allowCustomRequests}")
-    private boolean allowCustomRequests;
-
-    @Value("${socketio.namespace}")
-    private String namespace;
+    @Resource
+    private NettyIOProperties socketioProperties;
 
     @Bean
     public SocketIOServer socketIOServer(){
         SocketConfig socketConfig = new SocketConfig();
-        socketConfig.setTcpNoDelay(true);
-        socketConfig.setSoLinger(0);
+        socketConfig.setTcpNoDelay(true);       // 允许小数据包立即发送
+        socketConfig.setSoLinger(0);            // 套接字在关闭时立即释放资源
 
         com.corundumstudio.socketio.Configuration config = new com.corundumstudio.socketio.Configuration();
-        config.setHostname(host);
-        config.setPort(port);
-        config.setOrigin(origin);
-        config.setBossThreads(bossCount);
-        config.setAllowCustomRequests(allowCustomRequests);
+        config.setHostname(socketioProperties.getHost());
+        config.setPort(socketioProperties.getPort());
+        config.setOrigin(socketioProperties.getOrigin());
+        config.setBossThreads(socketioProperties.getBossCount());
+        config.setAllowCustomRequests(socketioProperties.isAllowCustomRequests());
         config.setSocketConfig(socketConfig);
 
-        final SocketIOServer server = new SocketIOServer(config);
-        server.addNamespace(namespace);
+        SocketIOServer server = new SocketIOServer(config);
+
+        server.start();
         //启动socket服务
         return server;
     }
@@ -52,13 +39,5 @@ public class NettyIOConfig {
     @Bean
     public SpringAnnotationScanner getSpringAnnotationScanner(SocketIOServer server) {
         return new SpringAnnotationScanner(server);
-    }
-
-    /**
-     * 项目启动时，自动开启socket.io
-     */
-    @Bean
-    public CommandLineRunner run(SocketIOServer server){
-        return args -> server.start();
     }
 }

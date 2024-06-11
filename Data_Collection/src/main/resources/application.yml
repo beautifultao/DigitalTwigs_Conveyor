@@ -14,16 +14,16 @@ spring:
         enabled: true
     nacos:
       discovery:
-        server-addr: 192.168.86.134:8848
+        server-addr: 192.168.86.121:8848
 
 plc_client:
   ip: 127.0.0.1
   port: 8888
 
-socketio:
-  host: 127.0.0.1
-  port: 9000
-  Origin: "*"
-  bossCount: 1
-  namespace: "/conveyor"
-  allowCustomRequests: true
+conveyor:
+  socketio:
+    host: 127.0.0.1
+    port: 9000
+    origin: "*"
+    bossCount: 1
+    allowCustomRequests: true

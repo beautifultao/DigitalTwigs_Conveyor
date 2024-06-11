@@ -17,7 +17,6 @@ public class JwtInterceptor implements HandlerInterceptor {
     @Resource
     private JwtProperties jwtProperties;
 
-
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
 
