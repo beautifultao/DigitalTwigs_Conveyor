@@ -1,6 +1,7 @@
 package com.cumt.data.entity;
 
 import com.alibaba.fastjson2.JSON;
+import com.cumt.common.entity.Vector3;
 
 import java.util.ArrayList;
 import java.util.List;

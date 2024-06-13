@@ -5,6 +5,8 @@ import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.annotation.OnConnect;
 import com.corundumstudio.socketio.annotation.OnDisconnect;
 import com.corundumstudio.socketio.annotation.OnEvent;
+import com.cumt.data.service.ICollectionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +16,10 @@ import java.util.concurrent.ConcurrentHashMap;
 @Component
 @ConditionalOnClass(SocketIOClient.class)
 public class NettyEventHandle {
+
+    @Autowired
+    private ICollectionService collectionService;
+
     private final String roomName = "pointCloud";
     private final ConcurrentHashMap<UUID, SocketIOClient> socketIOClientMap = new ConcurrentHashMap<>();
 
@@ -39,6 +45,10 @@ public class NettyEventHandle {
 
         socketIOClientMap.remove(client.getSessionId());
         System.out.println("客户端:" + client.getSessionId() + "已断开连接");
+
+        if(socketIOClientMap.size() == 0){
+            collectionService.stopCollection();
+        }
     }
 
     @OnEvent("vue")

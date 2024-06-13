@@ -3,8 +3,8 @@ package com.cumt.data.service;
 import com.sun.jna.Library;
 import com.sun.jna.Native;
 
-public interface ISoLibrary extends Library {
-    ISoLibrary INSTANCE = Native.load("Collection", ISoLibrary.class);
+public interface ICollectionSo extends Library {
+    ICollectionSo INSTANCE = Native.load("Collection", ICollectionSo.class);
 
     byte[] getPoints();
     byte[] getPLCData();

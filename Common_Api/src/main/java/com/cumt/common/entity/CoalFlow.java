@@ -12,5 +12,8 @@ public class CoalFlow {
     private Float currentFlow;
     private Float sumVolume;
     private Float conveyorSpeed;
+    /*    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonFormat( pattern="yyyy-MM-dd HH:mm:ss")*/
     private LocalDateTime dateTime;
 }

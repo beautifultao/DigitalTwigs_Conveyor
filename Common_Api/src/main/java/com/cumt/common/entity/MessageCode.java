@@ -1,4 +1,4 @@
-package com.cumt.data.entity;
+package com.cumt.common.entity;
 
 public enum MessageCode {
     GET_POINT((byte) 0),

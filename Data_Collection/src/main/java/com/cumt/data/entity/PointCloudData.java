@@ -1,5 +1,7 @@
 package com.cumt.data.entity;
 
+import com.cumt.common.entity.Vector3;
+
 import java.util.LinkedList;
 import java.util.List;
 

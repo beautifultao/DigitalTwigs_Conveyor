@@ -3,8 +3,8 @@ package com.cumt.data.service.Impl.Socket;
 import com.alibaba.fastjson2.JSON;
 import com.corundumstudio.socketio.BroadcastOperations;
 import com.corundumstudio.socketio.SocketIOServer;
-import com.cumt.data.entity.MessageCode;
-import com.cumt.data.entity.Vector3;
+import com.cumt.common.entity.MessageCode;
+import com.cumt.common.entity.Vector3;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 

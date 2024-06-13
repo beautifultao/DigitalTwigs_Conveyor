@@ -1,6 +1,6 @@
 package com.cumt.data.controller;
 
-import com.cumt.data.entity.Result;
+import com.cumt.common.result.Result;
 import com.cumt.data.service.SocketClient;
 import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Value;
@@ -38,7 +38,7 @@ public class Socket_Control {
     }
 
     @RequestMapping("/start_socket2")
-    public <E>Result<E> start_socket2() throws InterruptedException {
+    public <E> Result<E> start_socket2() throws InterruptedException {
         if(socketClientData.connect_socket(host, 9999)){
             th = new Thread(()->{
                 socketClientData.startPeriodicTask();

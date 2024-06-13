@@ -26,10 +26,6 @@ public class UserController {
     @Resource
     private UserService userService;
 
-    @GetMapping("/test")
-    public Result test(){
-        return Result.success("你过关！");
-    }
 
     @PostMapping("/register")
     public Result register(String username, String password){
@@ -55,6 +51,4 @@ public class UserController {
                 .build();
         return Result.success(userLoginVO);
     }
-
-
 }

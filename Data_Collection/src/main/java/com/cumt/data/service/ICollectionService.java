@@ -1,6 +1,13 @@
 package com.cumt.data.service;
 
+import com.cumt.common.client.CalculativeDataClient;
+
 public interface ICollectionService {
+
+    boolean startCollection(CalculativeDataClient client);
+
+    void stopCollection();
+
     boolean startSocket();
     boolean stopSocket();
     boolean isConnected();

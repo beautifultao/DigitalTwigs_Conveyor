@@ -1,8 +1,8 @@
 package com.cumt.data.service.Impl.Socket;
 
 import com.alibaba.fastjson2.JSON;
-import com.cumt.data.entity.CoalFlow;
-import com.cumt.data.entity.MessageCode;
+import com.cumt.common.entity.CoalFlow;
+import com.cumt.common.entity.MessageCode;
 import jakarta.annotation.Resource;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
