@@ -1,6 +1,6 @@
 package com.cumt.data.service.Impl.Socket;
 
-import com.cumt.data.service.SocketClient;
+import com.cumt.data.service.ISocketClient;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -11,7 +11,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
-public abstract class BaseSocketClient implements SocketClient {
+public abstract class BaseISocketClient implements ISocketClient {
     protected Socket socketClient;
     protected BufferedOutputStream bufferedOut;
     protected BufferedInputStream bufferedIn;

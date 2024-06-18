@@ -2,7 +2,7 @@ package com.cumt.data.service;
 
 import java.io.IOException;
 
-public interface SocketClient {
+public interface ISocketClient {
     boolean connect_socket(String host, int port) throws InterruptedException;
     boolean isConnected();
     void stop_socket() throws IOException;

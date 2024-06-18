@@ -14,7 +14,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Service("pointsSocketClient")
-public class PointsSocketClient extends BaseSocketClient {
+public class PointsISocketClient extends BaseISocketClient {
     private final ByteBuffer buffer = ByteBuffer.allocate(4080);
     private final byte[] tempBuffer = new byte[4080];
     int bytesRead;

@@ -1,7 +1,7 @@
 package com.cumt.data.controller;
 
 import com.cumt.common.result.Result;
-import com.cumt.data.service.SocketClient;
+import com.cumt.data.service.ISocketClient;
 import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,18 +17,18 @@ public class Socket_Control {
     int port;
 
     @Resource(name = "pointsSocketClient")
-    private SocketClient socketClientPoint;
+    private ISocketClient ISocketClientPoint;
 
     @Resource(name = "DataSocketClient")
-    private SocketClient socketClientData;
+    private ISocketClient ISocketClientData;
 
     private Thread th;
 
     @RequestMapping("/start_socket1")
     public <E>Result<E> start_socket1() throws InterruptedException {
-        if(socketClientPoint.connect_socket(host, port)){
+        if(ISocketClientPoint.connect_socket(host, port)){
             th = new Thread(()->{
-                socketClientPoint.startPeriodicTask();
+                ISocketClientPoint.startPeriodicTask();
             });
             th.start();
             return Result.success();
@@ -39,9 +39,9 @@ public class Socket_Control {
 
     @RequestMapping("/start_socket2")
     public <E> Result<E> start_socket2() throws InterruptedException {
-        if(socketClientData.connect_socket(host, 9999)){
+        if(ISocketClientData.connect_socket(host, 9999)){
             th = new Thread(()->{
-                socketClientData.startPeriodicTask();
+                ISocketClientData.startPeriodicTask();
             });
             th.start();
             return Result.success();
@@ -54,8 +54,8 @@ public class Socket_Control {
 
     @RequestMapping("/stop_socket1")
     public <E>Result<E> stop_socket1() throws IOException, InterruptedException {
-        if(socketClientPoint.isConnected()){
-            socketClientPoint.stop_socket();
+        if(ISocketClientPoint.isConnected()){
+            ISocketClientPoint.stop_socket();
             th.join();
             return Result.success();
         } else {
@@ -64,8 +64,8 @@ public class Socket_Control {
     }
     @RequestMapping("/stop_socket2")
     public <E>Result<E> stop_socket2() throws IOException, InterruptedException {
-        if(socketClientData.isConnected()){
-            socketClientData.stop_socket();
+        if(ISocketClientData.isConnected()){
+            ISocketClientData.stop_socket();
             th.join();
             return Result.success();
         } else {

@@ -2,23 +2,17 @@ package com.cumt.data.service;
 
 import com.cumt.common.client.CalculativeDataClient;
 
+import java.util.List;
+
 public interface ICollectionService {
 
     boolean startCollection(CalculativeDataClient client);
 
     void stopCollection();
 
-    boolean startSocket();
-    boolean stopSocket();
-    boolean isConnected();
+    boolean setParam(List<Float> params);
 
-    /**
-     * 一轮通信的具体内容
-     */
-    void processData();
+    boolean switchON();
 
-    /**
-     * 开启循环任务processData()
-     */
-    void startPeriodTask();
+    boolean switchOFF();
 }

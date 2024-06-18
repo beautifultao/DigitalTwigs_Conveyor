@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 @Service("DataSocketClient")
-public class DataSocketClient extends BaseSocketClient {
+public class DataISocketClient extends BaseISocketClient {
     ByteBuffer buffer = ByteBuffer.allocate(Float.BYTES * 3).order(ByteOrder.LITTLE_ENDIAN);
     @Resource
     private RedisTemplate<String,String> redisTemplate;
