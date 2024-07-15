@@ -19,21 +19,27 @@ public class JwtInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+        // 处理预检请求
+        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+            return true;
+        }
 
         String token = request.getHeader(jwtProperties.getTokenHeader());
         if (token == null || !token.startsWith(jwtProperties.getTokenHead())) {
+            System.out.println("Token is null");
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return false;
         }
 
         token = token.substring(7);
         try {
-            log.info("jwt校验:{}", token);
+//            log.info("jwt校验:{}", token);
             Claims claims = JwtUtil.parseJwt(jwtProperties.getSecretKey(), token);
             Long userId = claims.get("userId", Long.class);
             ThreadLocalUtil.setCurrentId(userId);
             return true;
         } catch (Exception e) {
+            System.out.println("token无效或过期");
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return false;
         }

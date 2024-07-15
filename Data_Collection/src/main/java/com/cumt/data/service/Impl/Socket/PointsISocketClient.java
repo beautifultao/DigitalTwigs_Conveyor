@@ -6,6 +6,7 @@ import com.corundumstudio.socketio.SocketIOServer;
 import com.cumt.common.entity.MessageCode;
 import com.cumt.common.entity.Vector3;
 import jakarta.annotation.Resource;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -21,6 +22,7 @@ public class PointsISocketClient extends BaseISocketClient {
     private final List<Vector3> pointList = new LinkedList<>();
     
     @Resource
+    @Lazy
     private SocketIOServer socketIOServer;
 
     /**

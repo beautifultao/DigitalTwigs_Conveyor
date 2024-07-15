@@ -31,12 +31,12 @@ public class ThreadPoolConfig {
         AtomicInteger counter = new AtomicInteger(1);
         LinkedBlockingQueue<Runnable> queue = new LinkedBlockingQueue<Runnable>(QUEUE_CAPACITY);
         return new ThreadPoolExecutor(
-                CORE_POOL_SIZE,
-                MAX_POOL_SIZE,
-                KEEP_ALIVE_SECONDS,
+                CORE_POOL_SIZE,     //  核心线程数, 2N + 1 (N为CPU核数)
+                MAX_POOL_SIZE,      // 最大线程数
+                KEEP_ALIVE_SECONDS, // 空闲线程存活时间
                 TimeUnit.SECONDS,
-                queue,
+                queue,               // 线程任务队列
                 r -> new Thread(r,"ThreadPool-" + counter.getAndIncrement()),
-                new ThreadPoolExecutor.DiscardPolicy());
+                new ThreadPoolExecutor.DiscardPolicy());    // 线程队列满时的拒绝策略(当前的策略为直接丢弃)
     }
 }

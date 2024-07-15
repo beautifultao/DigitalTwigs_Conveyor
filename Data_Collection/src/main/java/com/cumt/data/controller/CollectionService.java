@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/collection")
 public class CollectionService {
-
     private final CalculativeDataClient calculativeDataClient;
     private final ICollectionService collectionService;
 

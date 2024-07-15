@@ -1,4 +1,4 @@
-package com.cumt.front.entity.vo;
+package com.cumt.front.domain.vo;
 
 import lombok.Builder;
 import lombok.Data;
@@ -12,4 +12,5 @@ public class UserVO implements Serializable {
     private String username;
     private String password;
     private String token;
+    private Integer privilege;
 }

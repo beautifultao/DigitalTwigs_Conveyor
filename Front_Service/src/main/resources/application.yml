@@ -10,10 +10,16 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/conveyor_belt?useSSL=FALSE&serverTimezone=Asia/Shanghai
     username: unity
     password: 123456
+  cloud:
+    nacos:
+      config:
+        import-check:
+          enabled: false
 
 conveyor:
   jwt:
     secretKey: CUMT_B405_DigitalTwigs_Conveyor
     tokenHeader: Authorization
     tokenHead: Bearer
-    expiration: 86400000
+    expiration: 10800000   # 60 * 60 * 3 *1000
+

@@ -1,4 +1,4 @@
-package com.cumt.data.service;
+package com.cumt.data.SO;
 
 import com.sun.jna.Library;
 import com.sun.jna.Native;

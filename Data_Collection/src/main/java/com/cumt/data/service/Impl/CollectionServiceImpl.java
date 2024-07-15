@@ -1,8 +1,6 @@
 package com.cumt.data.service.Impl;
 
 import com.cumt.common.client.CalculativeDataClient;
-import com.cumt.data.service.DataCenterSo;
-import com.cumt.data.service.DataPackSo;
 import com.cumt.data.service.ICollectionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,18 +8,22 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.concurrent.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
 import java.util.concurrent.locks.ReentrantLock;
 
 @Service
 @Slf4j
 public class CollectionServiceImpl implements ICollectionService {
     private final ReentrantLock lock = new ReentrantLock();
-    private Thread th;
+
+    private Future<?> collectionTask;
+
     private volatile boolean running = true;
 
-    DataPackSo dataPackSo = DataPackSo.INSTANCE;
-    DataCenterSo dataCenterSo = DataCenterSo.INSTANCE;
+/*    DataPackSo dataPackSo = DataPackSo.INSTANCE;
+    DataCenterSo dataCenterSo = DataCenterSo.INSTANCE;*/
 
     @Autowired
     @Qualifier("taskExecutor")
@@ -33,26 +35,30 @@ public class CollectionServiceImpl implements ICollectionService {
         if(lock.tryLock()) {
             running = true;
 
-            th = new Thread(()->{
+            collectionTask = executorService.submit(() -> {
                 while (running) {
                     long startTime = System.currentTimeMillis();
-                    // 调用taskExecutor线程池，提交异步任务
-                    CompletableFuture.supplyAsync(client::readPhoto, executorService)
-                           .thenAccept(result -> {
+
+                    CompletableFuture.supplyAsync(client::readPhoto/* 提交的任务 */, executorService)
+                            .thenAccept(result -> {
                                 long duration = System.currentTimeMillis() - startTime;
-                                /**
-                                 *  异步任务
-                                 */
-                                System.out.println("图片大小"+result.length);
-                                System.out.println("本轮耗时:"+duration);
+
+                                System.out.println("图片大小" + result.length);
+                                System.out.println("本轮耗时:" + duration);
                             })
-                           .exceptionally(ex -> {
-                                log.error("异步线程任务报错："+ex.getMessage());
+                            .exceptionally(ex -> {
+                                log.error("异步线程任务报错：" + ex.getMessage());
                                 return null;
                             });
+
+                    try {
+                        Thread.sleep(1000);  // 控制轮询间隔
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                        break;
+                    }
                 }
             });
-            th.start();
             log.info("开始收集数据");
             return true;
         } else {
@@ -66,7 +72,9 @@ public class CollectionServiceImpl implements ICollectionService {
         if(lock.isHeldByCurrentThread())
             lock.unlock();
 
-        th.interrupt();
+        if (collectionTask != null) {
+            collectionTask.cancel(true);
+        }
         log.info("停止收集数据");
     }
 
@@ -88,6 +96,4 @@ public class CollectionServiceImpl implements ICollectionService {
     public boolean switchOFF() {
         return false;
     }
-
-
 }

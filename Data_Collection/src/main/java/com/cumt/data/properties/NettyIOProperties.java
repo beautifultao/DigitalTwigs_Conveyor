@@ -12,6 +12,5 @@ public class NettyIOProperties {
     private Integer port;
     private String origin;
     private Integer bossCount;
-    private String[] namespace;
     private boolean allowCustomRequests;
 }

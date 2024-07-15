@@ -23,12 +23,12 @@ public class CalculativeDataController {
     private final ISoLibrary _soLibrary;
 
     AtomicInteger counter = new AtomicInteger(1);
-    @RequestMapping("/data")
+    @GetMapping ("/data")
     public CoalFlow getCalculativeCoalFlowData(byte[] rawData){
         return _soLibrary.getCoalFlow(rawData);
     }
 
-    @RequestMapping("/pointCloud")
+    @GetMapping("/pointCloud")
     public List<Vector3> getCalculativePointData(byte[] rawData){
         return _soLibrary.getPoints(rawData);
     }
