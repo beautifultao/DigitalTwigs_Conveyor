@@ -13,6 +13,7 @@ public class ParamServiceImpl<M extends BaseMapper<T>, T> extends ServiceImpl<M,
 
     @Override
     public void saveParam(T entity) {
+        // 添加createTime 字段
         try {
             Field createTimeField = entity.getClass().getDeclaredField("createTime");
             createTimeField.setAccessible(true);

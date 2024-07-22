@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: front-service
+  cloud:
+    nacos:
+      server-addr: 192.168.86.121:8848
+      config:
+        file-extension: yaml
+        shared-configs:
+          - data-id: DT-jdbc.yaml

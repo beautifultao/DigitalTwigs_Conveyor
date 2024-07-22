@@ -13,4 +13,6 @@ public class NettyIOProperties {
     private String origin;
     private Integer bossCount;
     private boolean allowCustomRequests;
+    private String vueRoom;
+    private String unityRoom;
 }

@@ -8,6 +8,9 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * 线程池配置类
+ */
 public class ThreadPoolConfig {
     /*
      * 核心线程数, 2N + 1 (N为CPU核数)

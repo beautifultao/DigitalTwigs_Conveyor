@@ -1,44 +1,41 @@
 package com.cumt.calculation.controller;
 
-import com.cumt.calculation.entity.CoalFlow;
-import com.cumt.calculation.entity.Vector3;
-import com.cumt.calculation.service.ISoLibrary;
-import jakarta.annotation.PostConstruct;
+import com.cumt.calculation.service.ReconstructPointService;
+import com.cumt.common.entity.PointCloudResult;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/calculation")
 public class CalculativeDataController {
-    private final ISoLibrary _soLibrary;
 
-    AtomicInteger counter = new AtomicInteger(1);
-    @GetMapping ("/data")
-    public CoalFlow getCalculativeCoalFlowData(byte[] rawData){
-        return _soLibrary.getCoalFlow(rawData);
+    private final ReconstructPointService reconstructPointService;
+
+    @GetMapping("/hi")
+    public String callServiceB(@RequestParam String param1, @RequestParam String param2) {
+        return "接收到参数"+param1+param2;
     }
 
-    @GetMapping("/pointCloud")
-    public List<Vector3> getCalculativePointData(byte[] rawData){
-        return _soLibrary.getPoints(rawData);
+    @GetMapping("/reconstructIndex")
+    PointCloudResult trianglesIndex(@RequestParam byte[] rawData, @RequestParam float z_min,
+                                    @RequestParam float z_max){
+        return reconstructPointService.getPointListAndIndex(rawData, z_min, z_max);
     }
 
-    @GetMapping("/getImageByte")
+    // TODO: 数据计算模块暴露给数据服务模块的方法的实现
+
+
+
+
+/*    @GetMapping("/getImageByte")
     public byte[] readPhoto(){
         init();
         return imageBytes;
     }
-
     private byte[] imageBytes;
     @PostConstruct
     public void init() {
@@ -52,5 +49,5 @@ public class CalculativeDataController {
             // 处理异常
             e.printStackTrace();
         }
-    }
+    }*/
 }

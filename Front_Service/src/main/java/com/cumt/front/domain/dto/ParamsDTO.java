@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class ParamsDTO {
-    private PLCParamDTO plcParam;
-    private CameraParamDTO cameraParam;
+    private ReconstructionParamDTO reconstructionParam;
+    // 其他需热更新的参数
 }

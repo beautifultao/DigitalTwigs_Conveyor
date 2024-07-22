@@ -13,6 +13,7 @@
         <module>Front_Service</module>
         <module>Common_Api</module>
         <module>Data_Calculation</module>
+        <module>Gateway</module>
     </modules>
 
     <parent>

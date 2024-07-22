@@ -8,6 +8,9 @@ import jakarta.annotation.Resource;
 import org.springframework.context.annotation.Bean;
 
 
+/**
+ * socketIO的配置类
+ */
 public class NettyIOConfig {
     @Resource
     private NettyIOProperties socketioProperties;

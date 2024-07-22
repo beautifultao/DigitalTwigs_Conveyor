@@ -3,14 +3,13 @@ package com.cumt.front.domain.vo;
 import lombok.Builder;
 import lombok.Data;
 
-import java.io.Serializable;
-
 @Data
 @Builder
-public class UserVO implements Serializable {
+public class UserVO {
     private Long id;
     private String username;
     private String password;
     private String token;
     private Integer privilege;
+    private Long remainingTime;
 }

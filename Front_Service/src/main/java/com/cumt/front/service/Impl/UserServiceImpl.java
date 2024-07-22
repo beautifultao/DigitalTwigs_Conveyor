@@ -46,6 +46,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,UserPO> implements U
                 .username(user.getUsername())
                 .token(token)
                 .privilege(user.getPrivilege())
+                .remainingTime(jwtProperties.getExpiration())
                 .build();
     }
 

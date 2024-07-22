@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: data-collection
+  cloud:
+    openfeign:
+      okhttp:
+        enabled: true
+    nacos:
+      server-addr: 192.168.86.121:8848
+      config:
+        file-extension: yaml
